@@ -42,7 +42,10 @@ public class AccountResource {
             throw new NotFoundException();
         }
 
-        return representationFactory.newRepresentation(getSelf(accountNumber)).withBean(account);
+        return representationFactory.newRepresentation(getSelf(accountNumber))
+                .withLink("deposit", "/account/deposit/" + accountNumber)
+                .withLink("withdraw", "/account/withdraw/" + accountNumber)
+                .withBean(account);
     }
 
     private URI getSelf(String... params) {
